@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://liya-plastic.github.io
+Sitemap: https://liya-plastic.github.io/sitemap.xml
