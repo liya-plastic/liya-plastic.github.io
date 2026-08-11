@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pages-artifact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify required static files
+        run: |
+          test -f .nojekyll
+          test -f sitemap.xml
+          test -f robots.txt
+          test -f zh-tw/index.html
+          test -f zh-tw/request-quote/index.html
+          grep -q 'https://liya-plastic.github.io' sitemap.xml
